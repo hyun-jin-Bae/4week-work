@@ -1,0 +1,59 @@
+package com.example.selfproject4_4
+
+import android.os.Bundle
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val switchStart = findViewById<Switch>(R.id.switch2)
+        val textQuestion = findViewById<TextView>(R.id.textView3)
+        val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
+        val radioOreo = findViewById<RadioButton>(R.id.radioButton)
+        val radioPie = findViewById<RadioButton>(R.id.radioButton2)
+        val radioQ = findViewById<RadioButton>(R.id.radioButton3)
+        val imageView = findViewById<ImageView>(R.id.imageView)
+        val btnExit = findViewById<Button>(R.id.button2)
+        val btnReset = findViewById<Button>(R.id.button3)
+
+        imageView.visibility = ImageView.INVISIBLE
+
+        switchStart.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                textQuestion.visibility = TextView.VISIBLE
+                radioGroup.visibility = RadioGroup.VISIBLE
+                imageView.visibility = ImageView.VISIBLE
+            } else {
+                textQuestion.visibility = TextView.INVISIBLE
+                radioGroup.visibility = RadioGroup.INVISIBLE
+                imageView.visibility = ImageView.INVISIBLE
+            }
+        }
+
+
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.radioButton -> imageView.setImageResource(R.drawable.o)
+                R.id.radioButton2 -> imageView.setImageResource(R.drawable.pie)
+                R.id.radioButton3 -> imageView.setImageResource(R.drawable.q)
+            }
+        }
+
+
+        btnExit.setOnClickListener {
+            finishAffinity()
+        }
+
+
+        btnReset.setOnClickListener {
+            switchStart.isChecked = false
+            radioGroup.clearCheck()
+            imageView.visibility = ImageView.INVISIBLE
+        }
+    }
+}
